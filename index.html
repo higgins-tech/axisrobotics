@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Axis Robotics — The Compounding Data Engine for Physical AI</title>
+  <meta name="description"
+    content="Axis Robotics is building the world's largest scalable data infrastructure for robotics, powered by a decentralized network of 100K+ contributors.">
+  <script src="assets/sources.js"></script>
+  <script src="assets/app-bundle_mu8aihys.js"></script>
+  <script src="assets/qr-code-styling.js"></script>
+  <!-- Favicon (inline sunburst mark) -->
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg stroke='%23000' stroke-width='9' stroke-linecap='round'%3E%3Cline x1='50' y1='4' x2='50' y2='96'/%3E%3Cline x1='4' y1='50' x2='96' y2='50'/%3E%3Cline x1='16' y1='16' x2='84' y2='84'/%3E%3Cline x1='84' y1='16' x2='16' y2='84'/%3E%3C/g%3E%3C/svg%3E">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Remix Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="is-locked">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="icon-sunburst" viewBox="0 0 100 100">
+      <g stroke="currentColor" stroke-width="7" stroke-linecap="round">
+        <line x1="50" y1="2" x2="50" y2="98"></line>
+        <line x1="2" y1="50" x2="98" y2="50"></line>
+        <line x1="17" y1="17" x2="83" y2="83"></line>
+        <line x1="83" y1="17" x2="17" y2="83"></line>
+        <line x1="50" y1="14" x2="50" y2="30" transform="rotate(22.5 50 50)"></line>
+        <line x1="50" y1="14" x2="50" y2="30" transform="rotate(67.5 50 50)"></line>
+        <line x1="50" y1="14" x2="50" y2="30" transform="rotate(112.5 50 50)"></line>
+        <line x1="50" y1="14" x2="50" y2="30" transform="rotate(157.5 50 50)"></line>
+      </g>
+    </symbol>
+  </svg>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ==================================================================
+     PRELOADER
+================================================================== -->
+  <div id="preloader" aria-hidden="true">
+    <div class="preloader__mark">
+      <svg class="preloader__icon">
+        <use href="#icon-sunburst"></use>
+      </svg>
+    </div>
+    <div class="preloader__wordmark">AXIS<br>ROBOTICS</div>
+    <div class="preloader__percent"><span id="preloaderPercent">0</span>%</div>
+    <div class="preloader__bar"><span id="preloaderBar"></span></div>
+  </div>
+
+  <!-- ==================================================================
+     HEADER / NAV
+================================================================== -->
+  <header id="siteHeader" class="site-header" data-theme="dark">
+    <div class="site-header__inner">
+
+      <a href="#top" class="brand" aria-label="Axis Robotics — home">
+        <svg class="brand__icon">
+          <use href="#icon-sunburst"></use>
+        </svg>
+        <span class="brand__text">AXIS<br>ROBOTICS</span>
+      </a>
+
+      <!-- Expanded inline nav — only shown at very top of hero, desktop only -->
+      <nav class="nav-expanded" id="navExpanded" aria-label="Primary (expanded)">
+        <ul>
+          <li><button type="button" class="nav-expanded__item" data-category="Solutions">Solutions <i
+                class="ri-add-line"></i></button></li>
+          <li><button type="button" class="nav-expanded__item" data-category="Academic">Academic <i
+                class="ri-add-line"></i></button></li>
+          <li><button type="button" class="nav-expanded__item" data-category="Learning">Learning <i
+                class="ri-add-line"></i></button></li>
+          <li><button type="button" class="nav-expanded__item" data-category="Resources">Resources <i
+                class="ri-add-line"></i></button></li>
+          <li><button type="button" class="nav-expanded__item" data-category="Community">Community <i
+                class="ri-add-line"></i></button></li>
+        </ul>
+      </nav>
+
+      <!-- Compact nav toggle — default state everywhere else + all of mobile -->
+      <button type="button" class="nav-compact" id="navCompact" aria-haspopup="true" aria-expanded="false"
+        aria-controls="megaMenu">
+        <span>Menu</span>
+        <i class="ri-add-line nav-compact__icon"></i>
+      </button>
+
+      <a href="#" class="btn btn--launch connect-button" id="launchAppBtn">
+        <span>Launch App</span>
+        <i class="ri-arrow-right-up-line"></i>
+      </a>
+    </div>
+  </header>
+
+  <!-- ==================================================================
+     MEGA MENU OVERLAY
+================================================================== -->
+  <div class="mega-menu" id="megaMenu" aria-hidden="true">
+    <div class="mega-menu__panel">
+      <div class="mega-menu__head">
+        <span class="mega-menu__title">Menu</span>
+        <button type="button" class="mega-menu__close" id="megaMenuClose" aria-label="Close menu">
+          <i class="ri-close-line"></i>
+        </button>
+      </div>
+      <div class="mega-menu__columns" id="megaMenuColumns"><!-- populated by JS from #footerNav --></div>
+      <div class="mega-menu__foot">
+        <div class="mega-menu__social">
+          <a href="#" aria-label="X (Twitter)"><i class="ri-twitter-x-line"></i></a>
+          <a href="#" aria-label="Discord"><i class="ri-discord-line"></i></a>
+        </div>
+        <a href="#" class="btn btn--pill btn--dark connect-button">
+          <span>Launch App</span>
+          <i class="ri-arrow-right-up-line"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="mega-menu__scrim" id="megaMenuScrim"></div>
+
+  <main id="main">
+
+    <!-- ================================================================
+       HERO
+  ================================================================= -->
+    <section id="top" class="hero" data-theme="dark" data-section-theme="dark">
+      <div class="hero__media">
+        <video src="img/heroclip.mp4" autoplay muted loop playsinline></video>
+        <div class="hero__media-fade"></div>
+      </div>
+
+      <div class="hero__content">
+        <p class="hero__intro reveal" data-reveal>
+          We are building the world's largest scalable data infrastructure for robotics.
+          Powered by a decentralized network of 100K+ contributors, compounding data
+          diversity at foundation-model scale
+        </p>
+      </div>
+
+      <div class="hero__bottom">
+        <h1 class="hero__headline reveal" data-reveal>The Compounding Data<br>Engine for Physical AI</h1>
+        <a href="#" class="btn btn--pill btn--light hero__cta reveal connect-button" data-reveal>
+          <span>Launch App</span>
+          <i class="ri-arrow-right-up-line"></i>
+        </a>
+      </div>
+    </section>
+    <!-- ================================================================
+       BOTTLENECK — pinned card stack, "1/3" pagination
+  ================================================================= -->
+    <section id="bottleneck" class="bottleneck" data-section-theme="light">
+      <div class="pin-wrapper" id="bottleneckPin" data-steps="3">
+        <div class="pin-inner">
+          <div class="bottleneck__grid">
+
+            <div class="bottleneck__copy">
+              <p class="eyebrow">The Bottleneck is</p>
+              <h2 class="bottleneck__data">DATA</h2>
+              <p class="bottleneck__sub">Not <em>Hardware</em></p>
+            </div>
+
+            <div class="bottleneck__cards">
+              <div class="bottleneck__pager">
+                <span class="bottleneck__pager-label">Menu</span>
+                <i class="ri-add-line"></i>
+                <span class="bottleneck__pager-count"><span id="bottleneckIndex">1</span>/3</span>
+              </div>
+
+              <div class="card-stack" id="bottleneckStack">
+                <article class="story-card" data-index="0">
+                  <img class="story-card__media" src="img/algorithms.png">
+                  </img>
+
+                </article>
+
+                <article class="story-card" data-index="1">
+                  <img class="story-card__media " src="img/hardware.png">
+                  </img>
+                </article>
+
+                <article class="story-card" data-index="2">
+                  <img class="story-card__media" src="img/compounding.png">
+                  </img>
+
+                </article>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+       INFINITY LOOP — scroll-tied word reveal
+  ================================================================= -->
+    <section id="loop" class="loop" data-section-theme="dark">
+      <p class="loop__text" id="loopText">
+        <span data-w>We</span> <span data-w>don't</span> <span data-w>just</span> <span data-w>deliver</span> <span
+          data-w>static</span> <span data-w>datasets.</span> <span data-w>We</span> <span data-w>operate</span> <span
+          data-w>an</span> <span data-w data-accent>organic,</span> <span data-w data-accent>self-growing</span> <span
+          data-w data-accent>infinity</span> <span data-w data-accent>loop</span>
+      </p>
+    </section>
+
+    <!-- ================================================================
+       LIVING SYSTEM — floating rock, parallax
+  ================================================================= -->
+    <section id="living-system" class="living-system" data-section-theme="light">
+      <h2 class="living-system__heading reveal" data-reveal>A living system that<br>compounds over time</h2>
+      <div class="living-system__rock" id="rockParallax">
+        <img class="rock-shape" src="img/giphy.gif" loop muted autoplay>
+        </img>
+      </div>
+    </section>
+
+    <!-- ================================================================
+       QUADRANTS — green section, 4 features around rock
+  ================================================================= -->
+    <section id="quadrants" class="quadrants" data-section-theme="green">
+      <div class="quadrants__rock" id="quadrantsRock">
+        <div class="quadrants__ring" aria-hidden="true"></div>
+        <img class="rock-shape" src="img/giphy.gif" loop muted autoplay>
+        </img>
+      </div>
+
+      <div class="quadrants__grid">
+        <div class="quadrant reveal" data-reveal data-quad="tl">
+          <i class="ri-drag-move-2-line"></i>
+          <h3>Task Generation</h3>
+          <p>Procedural generation of diverse environments</p>
+        </div>
+        <div class="quadrant reveal" data-reveal data-quad="tr">
+          <i class="ri-group-line"></i>
+          <h3>Data Collection</h3>
+          <p>Global human network providing demonstrations</p>
+        </div>
+        <div class="quadrant reveal" data-reveal data-quad="bl">
+          <i class="ri-sparkling-2-line"></i>
+          <h3>Optimization</h3>
+          <p>Mining failures to generate new targeted tasks</p>
+        </div>
+        <div class="quadrant reveal" data-reveal data-quad="br">
+          <i class="ri-add-circle-line"></i>
+          <h3>Model Training</h3>
+          <p>Automated evaluation to diagnose data quality</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+       ECOSYSTEM
+  ================================================================= -->
+    <section id="ecosystem" class="ecosystem" data-section-theme="light">
+      <h2 class="ecosystem__heading reveal" data-reveal>An inherently<br>open ecosystem</h2>
+      <p class="ecosystem__body reveal" data-reveal>
+        Our true power lies in openness. We embrace agnostic infrastructures, a massive
+        global workforce, and heterogeneous multi-modal data. Through our universal data
+        middleware, we process this raw ecosystem scale into high-fidelity substrates
+        ready to power any robotic embodiment.
+      </p>
+    </section>
+
+    <!-- ================================================================
+       PILLARS — Infra / Workforce / Data
+  ================================================================= -->
+    <section id="pillars" class="pillars" data-section-theme="light">
+      <div class="pillars__grid">
+        <article class="pillar reveal" data-reveal>
+          <div class="pillar__head">
+            <h3>Infra</h3>
+            <p>Agnostic simulators &amp; hardware</p>
+          </div>
+          <video class="pillar__media" src="img/infra.mp4" loop autoplay muted playsinline>
+          </video>
+        </article>
+
+        <article class="pillar reveal" data-reveal>
+          <div class="pillar__head">
+            <h3>Workforce</h3>
+            <p>100K+ global human network</p>
+          </div>
+          <video class="pillar__media" src="img/workforce.mp4" loop autoplay muted playsinline>
+          </video>
+        </article>
+
+        <article class="pillar reveal" data-reveal>
+          <div class="pillar__head">
+            <h3>Data</h3>
+            <p>Heterogeneous multi-modal sources</p>
+          </div>
+          <video class="pillar__media" src="img/data.mp4" loop autoplay muted playsinline>
+          </video>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================================================================
+       PRODUCTS — pinned, 4 panels with progress rail
+  ================================================================= -->
+    <section id="products" class="products" data-section-theme="dark">
+      <div class="pin-wrapper" id="productsPin" data-steps="4">
+        <div class="pin-inner">
+          <div class="products__grid">
+
+            <div class="products__media">
+              <div class="device-mock" id="deviceMock" data-device="laptop">
+                <div class="device-mock__frame">
+                  <div class="device-mock__screen media-placeholder" id="productsScreen"
+                    data-asset-label="product-ui-1.png">
+                    <div class="media-placeholder__inner"><i class="ri-image-2-line"></i><span>Product screen</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="device-mock__base"></div>
+              </div>
+              <div class="products__ledge" aria-hidden="true"></div>
+            </div>
+
+            <div class="products__content">
+              <div class="products__pager">
+                <span>Products</span>
+                <span class="products__pager-count"><span id="productsIndex">1</span>/4</span>
+              </div>
+
+              <div class="products__rail">
+                <span class="products__rail-track"></span>
+                <span class="products__rail-dot" id="productsDot"></span>
+              </div>
+
+              <div class="products__panels" id="productsPanels">
+                <div class="products__panel" data-index="0" data-device="laptop">
+                  <img class="products__panel-media" src="img/taskgeneration1.png">
+
+                  </img>
+                  <h3>Task Generation Engine</h3>
+                  <p>We don't leave diversity to chance—we engineer it axis by axis. By multiplying embodiments, object,
+                    spatial, semantic, and visual dimensions, we generate exponentially growing data at scale in a
+                    highly cost-effective way</p>
+                  <a href="#" class="btn btn--pill btn--light connect-button"><span>View Details</span><i
+                      class="ri-arrow-right-up-line"></i></a>
+                </div>
+                <div class="products__panel" data-index="1" data-device="phone">
+                  <img class="products__panel-media" src="img/simdata.png">
+
+                  </img>
+                  <h3>Sim Data Collection Platform</h3>
+                  <p>Shifting data collection from legacy offline, sequential methods to an online, fleet-wide,
+                    massively parallel human-in-the-loop engine. By eliminating entry barriers, we leverage a global
+                    user base to drive generation at 10x the efficiency</p>
+                  <a href="#" class="btn btn--pill btn--light connect-button"><span>View Details</span><i
+                      class="ri-arrow-right-up-line"></i></a>
+                </div>
+                <div class="products__panel" data-index="2" data-device="laptop">
+                  <img class="products__panel-media" src="img/mobileego.png">
+
+                  </img>
+                  <h3>Automated Evaluation Engine</h3>
+                  <p>Every model checkpoint is stress-tested against a growing suite of tasks. Automated evaluation
+                    surfaces failure modes in minutes, not weeks, feeding directly back into targeted data generation
+                  </p>
+                  <a href="#" class="btn btn--pill btn--light connect-button"><span>View Details</span><i
+                      class="ri-arrow-right-up-line"></i></a>
+                </div>
+                <div class="products__panel" data-index="3" data-device="laptop">
+                  <img class="products__panel-media" src="img/dataprocessing.png">
+
+                  </img>
+                  <h3>Data-Processing Pipeline</h3>
+                  <p>Shifting from raw data accumulation to model-centric data engineering. Equipped with a rich
+                    toolset, our pipeline processes diverse inputs into on-demand, model-training-ready formats,
+                    delivering a 10x+ improvement in data quality</p>
+                  <a href="#" class="btn btn--pill btn--light connect-button"><span>View Details</span><i
+                      class="ri-arrow-right-up-line"></i></a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+       PARTNER MARQUEE
+  ================================================================= -->
+    <section id="partners" class="marquee-section" data-section-theme="dark" aria-label="Partners">
+      <div class="marquee">
+        <div class="marquee__track" id="marqueeTrack">
+          <!-- duplicated set A -->
+          <img class="marquee__item" src="img/manycore.png"></img>
+          <img class="marquee__item" src="img/dexmal.png"></img>
+          <img class="marquee__item" src="img/geely.png"></img>
+          <img class="marquee__item" src="img/lotus.png"></img>
+          <img class="marquee__item" src="img/stepfun.png"></img>
+          <img class="marquee__item" src="img/booster.png"></img>
+          <!-- duplicated set B (for seamless loop) -->
+          <img class="marquee__item" src="img/manycore.png"></img>
+          <img class="marquee__item" src="img/dexmal.png"></img>
+          <img class="marquee__item" src="img/geely.png"></img>
+          <img class="marquee__item" src="img/lotus.png"></img>
+          <img class="marquee__item" src="img/stepfun.png"></img>
+          <img class="marquee__item" src="img/booster.png"></img>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+       FOOTER
+  ================================================================= -->
+    <footer id="siteFooter" class="site-footer" data-section-theme="dark">
+
+
+      <div class="site-footer__rings" aria-hidden="true"></div>
+
+      <div class="site-footer__inner">
+        <div class="site-footer__top">
+          <svg class="site-footer__mark">
+            <use href="#icon-sunburst"></use>
+          </svg>
+          <span class="site-footer__wordmark">AXIS<br>ROBOTICS</span>
+        </div>
+
+        <nav class="footer-nav" id="footerNav" aria-label="Footer">
+          <div class="nav-col" data-category="Solutions">
+            <h4>Solutions</h4>
+            <ul>
+              <li><a href="#">Embodiment Integration</a></li>
+              <li><a href="#">Robotics Data for Models</a></li>
+              <li><a href="#">Industrial Sim2Real</a></li>
+            </ul>
+          </div>
+          <div class="nav-col" data-category="Academic">
+            <h4>Academic</h4>
+            <ul>
+              <li><a href="#">Advisor</a></li>
+              <li><a href="#">Research &amp; References</a></li>
+            </ul>
+          </div>
+          <div class="nav-col" data-category="Learning">
+            <h4>Learning</h4>
+            <ul>
+              <li><a href="#">Education</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">FAQ</a></li>
+            </ul>
+          </div>
+          <div class="nav-col" data-category="Resources">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="#">Docs</a></li>
+              <li><a href="#">Tech report</a></li>
+              <li><a href="#">Github</a></li>
+              <li><a href="#">Media Kit</a></li>
+            </ul>
+          </div>
+          <div class="nav-col" data-category="Community">
+            <h4>Community</h4>
+            <ul>
+              <li><a href="#">X</a></li>
+              <li><a href="#">Discord</a></li>
+            </ul>
+          </div>
+        </nav>
+
+        <div class="site-footer__bottom">
+          <p class="site-footer__tagline">The Compounding Data Engine for<br>Physical AI</p>
+          <p class="site-footer__copyright">©2026 AXIS Protocol Inc.</p>
+        </div>
+
+        <div class="site-footer__legal">
+          <div class="site-footer__social">
+            <a href="#" aria-label="X (Twitter)"><i class="ri-twitter-x-line"></i></a>
+            <a href="#" aria-label="Discord"><i class="ri-discord-line"></i></a>
+          </div>
+          <div class="site-footer__legal-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Settings</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="script.js" defer></script>
+  <script src="smoke-test.js"></script>
+</body>
+
+</html>
